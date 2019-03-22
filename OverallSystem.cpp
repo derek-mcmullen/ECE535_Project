@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-	cout << "Fuck that Jake guy" << endl;
+	cout << "Fuck that Derek guy" << endl;
 
 
 	system("pause");
