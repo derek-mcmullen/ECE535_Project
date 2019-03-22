@@ -1,2 +1,5 @@
 reset
+set ylabel 'Sample Value'
+set xlabel 'Amount of Gayness Derek is'
+set title 'Summary of the Year 2018'
 plot "signal.txt"
