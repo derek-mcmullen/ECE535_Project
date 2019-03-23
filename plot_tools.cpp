@@ -30,7 +30,7 @@ int demo(float pi){
 	// Open file for storing 'signal'
 	cout << "Opening file..." << endl;
 	ofstream signalFile;
-	signalFile.open("signal.txt");
+	signalFile.open("./data/signal.txt");
 
 	// Create a sine wave with .1 units between sample, for 3 cycles
 	for (int z = 0; z < 30; z++){
@@ -51,7 +51,7 @@ int demo(float pi){
 
 	// Call batch file that handles gnuplot
 	cout << "Plotting...\n";
-	system("plotter.bat");
+	system("plot_scripts\\plotter.bat");
 	 system("pause");
 	return 0;
 }

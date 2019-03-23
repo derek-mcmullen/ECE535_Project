@@ -1,1 +1,0 @@
-"gnuplot\\bin\\gnuplot.exe" -p -e "load 'plot.txt'"
