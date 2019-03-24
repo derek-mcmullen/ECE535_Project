@@ -24,7 +24,8 @@ int main()
 	// testing that files have been parsed appropriately
 	cout << configInData.mod_type << endl; 
 
-	//demo(PI);
+	demo(PI);
+
 	system("pause"); 
 
 }
