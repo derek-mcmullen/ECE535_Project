@@ -1,0 +1,9 @@
+# do not add whitespace between value pairs
+sample_rate=10000
+carrier_freq=1000000
+
+# modulation type can be fsk, psk, or ask
+mod_type=fsk
+
+# n-ary choices are 2, 4, 8, or 16
+n_ary=2

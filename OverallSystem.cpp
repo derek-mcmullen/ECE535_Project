@@ -1,16 +1,34 @@
+#include "ConfigLoader.h"
 #include "InterferenceSystem.h"
 #include "Sampler.h"
 
 #include <iostream>  
+#include <fstream>
+#include <math.h>   
+#include <string>
+#include <algorithm>
 
-using namespace std;
+#include "plot_tools.h"
 
+#define PI 3.14159265
+
+using namespace std; 
 
 int main()
 {
-	cout << "Fuck that Derek guy" << endl;
+	// config data struct
+	inData configInData; 
 
+	loadSettings( configInData ); 
 
-	system("pause");
-	return 0;
+	// testing that files have been parsed appropriately
+	cout << configInData.mod_type << endl; 
+
+	demo(PI);
+
+	system("pause"); 
+
 }
+
+
+
