@@ -6,17 +6,21 @@
 struct inData {
 
 	// variables that will be set from config file
-	double carrier_freq; 
-	double sample_rate; 
-	double n_ary;
-	std::string mod_type;
+	int carrier_freq; 
+	int sample_rate; 
+	int n_ary;
+	std::string mod_type; 
+	int samples_per_bit; 
+	int PI = M_PI; 
+	
 
 	// defining a default constructor with initialized values
 	inData() :
 		carrier_freq(1000000),
 		sample_rate(1000),
 		n_ary(2),
-		mod_type("fsk")
+		mod_type("fsk"), 
+		samples_per_bit( 10 )
 	{}
 
 };

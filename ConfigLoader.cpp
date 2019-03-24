@@ -29,15 +29,19 @@ void loadSettings( inData &in ) {
 			}
 			else if (strcmp(name.c_str(), "carrier_freq") == 0)
 			{
-				in.carrier_freq = stod(value);    // string to double 
+				in.carrier_freq = stoi(value);    // string to integer
 			}
 			else if (strcmp(name.c_str(), "sample_rate") == 0)
 			{
-				in.sample_rate = stod(value);    // string to double 
+				in.sample_rate = stoi(value);    // string to integer
 			}
 			else if (strcmp(name.c_str(), "n_ary") == 0)
 			{
-				in.n_ary = stoi(value);    // string to double 
+				in.n_ary = stoi(value);    // string to integer 
+			}
+			else if (strcmp(name.c_str(), "samples_per_bit") == 0)
+			{
+				in.samples_per_bit= stoi(value);    // string to integer 
 			}
 			/* more else if clauses */
 			else /* default: */
