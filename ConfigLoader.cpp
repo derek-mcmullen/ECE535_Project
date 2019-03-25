@@ -41,7 +41,11 @@ void loadSettings( inData &in ) {
 			}
 			else if (strcmp(name.c_str(), "symbol_rate") == 0)
 			{
-				in.symbol_rate= stoi(value);    // string to integer 
+				in.symbol_rate = stoi(value);    // string to integer 
+			}
+			else if (strcmp(name.c_str(), "freq_dev") == 0)
+			{
+				in.freq_dev = stoi(value);    // string to integer 
 			}
 			/* more else if clauses */
 			else /* default: */

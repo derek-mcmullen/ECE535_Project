@@ -10,3 +10,6 @@ n_ary=8
 
 # desired symbol rate in symbols/sec
 symbol_rate=10
+
+# allowable maximum frequency deviation for FSK
+freq_dev=1000

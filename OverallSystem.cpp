@@ -29,7 +29,8 @@ int main()
 	loadSettings( configInData ); 
 
 	// Simulate the modulation 
-	transmit( carrierData, configInData, messageToTransmit ); 
+	TransmitSystem TS; 
+	TS.transmit( carrierData, configInData, messageToTransmit ); 
 	dumpToFile("./data/transmitOut.dat", carrierData); 
 
 

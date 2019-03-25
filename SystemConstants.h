@@ -11,6 +11,7 @@ struct inData {
 	int n_ary;
 	std::string mod_type;
 	int symbol_rate;
+	int freq_dev; 
 
 
 	// defining a default constructor with initialized values
@@ -19,7 +20,8 @@ struct inData {
 		sample_rate(1000),
 		n_ary(2),
 		mod_type("fsk"),
-		symbol_rate(10)
+		symbol_rate(10), 
+		freq_dev(1000)
 	{}
 };
 

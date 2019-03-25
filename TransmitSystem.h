@@ -10,11 +10,21 @@
 #include <algorithm>
 #include <vector>
 
-void transmit(std::vector<double> &data, inData &in, std::vector<int> &message);
+class TransmitSystem {
 
-bool validateMessageData(const std::vector<int> &messageIn, const inData &configIn); 
-void transmitASK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
-void transmitFSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
-void transmitPSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
+public:
+	TransmitSystem(); 
+	void transmit(std::vector<double> &data, inData &in, std::vector<int> &message);
+private:
+	bool validateMessageData(const std::vector<int> &messageIn, const inData &configIn);
+	void transmitASK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
+	void transmitFSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
+	void transmitPSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
+
+	double duration_; 
+	double numTotalDataPts_; 
+	int dataPointsPerSymbol_; 
+}; 
 
 #endif // !TransmitSystem_h
+
