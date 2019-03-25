@@ -44,6 +44,10 @@ void loadSettings( inData &in ) {
 				in.samples_per_bit= stoi(value);    // string to integer 
 			}
 			/* more else if clauses */
+
+			/*
+			Add parsing for plots
+			*/
 			else /* default: */
 			{
 				std::cout << "Value for " << name << " was not loaded properly" << std::endl;
