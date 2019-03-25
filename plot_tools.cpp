@@ -15,6 +15,32 @@ Simple demo of gnuplot
 
 #define DEBUG false 
 
+
+// Creates a gnuplot file, takes in a filename of the data we want to plot.
+bool plot_file(const char* file_to_plot) {
+	// Create plot file 
+	// TODO: add functionality for plot configuration from config struct
+	ofstream plotFile;
+	plotFile.open("./plot_scripts/plot.txt");
+	if (plotFile.is_open()) {
+		plotFile << "reset\n" << "set ylabel 'Sample Value'\n" << "set xlabel 'Amount of Gayness Derek is'\n" << "set title 'Summary of the Year 2018'\n";
+		plotFile << "plot \"./data/" << file_to_plot << "\" with lines ls 1";
+		plotFile.close();
+	}
+	else {
+		// Break if we cant open file
+		cout << "Can't open file " << file_to_plot;
+		return false;
+	}
+
+	// Call batch file to plot.
+	system("plot_scripts\\plotter.bat");
+
+	return true;
+}
+
+
+// Basic plotting functionality
 int demo(float pi){
 
 	// Create some iterators
@@ -52,6 +78,9 @@ int demo(float pi){
 	// Call batch file that handles gnuplot
 	cout << "Plotting...\n";
 	system("plot_scripts\\plotter.bat");
-	 system("pause");
+	
+	if (DEBUG) {
+		system("pause");
+	}
 	return 0;
 }

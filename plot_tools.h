@@ -21,6 +21,7 @@ All plotting configuration should take place within the plot.txt file.
 
 using namespace std;
 
+bool plot_file(const char* file_to_plot);
 int demo(float pi);
 
 
