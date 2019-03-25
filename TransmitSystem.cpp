@@ -4,17 +4,22 @@
 
 void transmit(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn) {
 	
+	// validate message 
+	if ( validateMessageData(messageIn, configIn) ) {
+		if (strcmp(configIn.mod_type.c_str(), "ask") == 0) {
+			transmitASK(carrierOut, configIn, messageIn);
+		} 
+		else if (strcmp(configIn.mod_type.c_str(), "fsk") == 0) {
+			transmitFSK(carrierOut, configIn, messageIn);
+		}
+		else if (strcmp(configIn.mod_type.c_str(), "psk") == 0) {
+			transmitPSK(carrierOut, configIn, messageIn);
+		}
+	}
+	else {
+		std::cout << "Invalid message data provided. Will not transmit" << std::endl;
+	}
 
-	if (strcmp(configIn.mod_type.c_str(), "ask") == 0) {
-		transmitASK(carrierOut, configIn, messageIn);
-	} 
-	else if (strcmp(configIn.mod_type.c_str(), "fsk") == 0) {
-		transmitFSK(carrierOut, configIn, messageIn);
-	}
-	else if (strcmp(configIn.mod_type.c_str(), "psk") == 0) {
-		transmitPSK(carrierOut, configIn, messageIn);
-	}
-	
 	return;
 }
 
@@ -22,16 +27,7 @@ void transmit(std::vector<double> &carrierOut, inData &configIn, std::vector<int
 bool validateMessageData(const std::vector<int>& messageIn, const inData & configIn)
 {
 	// upper limit of alphabet for n_ary scheme
-	int maxAlpha = 1;
-	if (configIn.n_ary == 4) {
-		maxAlpha = 2; 
-	} 
-	else if (configIn.n_ary == 8) {
-		maxAlpha = 3;
-	}
-	else if (configIn.n_ary == 16) {
-		maxAlpha = 4;
-	}
+	int maxAlpha = configIn.n_ary;
 
 	// check each message symbol
 	for (int i = 0; i < messageIn.size(); i++) {
@@ -45,29 +41,25 @@ bool validateMessageData(const std::vector<int>& messageIn, const inData & confi
 
 void transmitASK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn) {
 	
-	// validate message 
-	if (validateMessageData(messageIn, configIn) ) {
+	double duration = ( 1 / (double)configIn.symbol_rate ) * messageIn.size();		// in seconds
+	double numTotalDataPts = ( duration / (1.0/configIn.carrier_freq) );
 
-		int ratio = configIn.carrier_freq / configIn.sample_rate;
-		int numTotalDataPts = configIn.samples_per_bit * messageIn.size() * ratio;
+	int dataPointsPerSymbol = ( numTotalDataPts / messageIn.size() ); 
 
-		// prep the carrier data points
-		for (int i = 0; i < numTotalDataPts; i++) {
-			carrierOut.push_back(sin(2 * M_PI * i / configIn.sample_rate));
-		}
+	// prep the carrier data points
+	for (int i = 0; i < numTotalDataPts; i++) {
+		carrierOut.push_back(sin(2 * configIn.carrier_freq * i));
+	}
 
-		// scale the amplitudes
-		int offset = 0;
-		for (int i = 0; i < messageIn.size(); i++) {
-			offset = i * configIn.samples_per_bit*ratio;
-			for (int j = 0; j < (configIn.samples_per_bit*ratio); j++) {
-				carrierOut[offset + j] *= messageIn[i];
-			}
+	// key the amplitudes
+	int offset = 0;
+	for (int i = 0; i < messageIn.size(); i++) {
+		offset = i * dataPointsPerSymbol;
+		for (int j = 0; j < dataPointsPerSymbol; j++) {
+			carrierOut[offset + j] *= messageIn[i];
 		}
 	}
-	else {
-		std::cout << "Invalid message data provided. Will not transmit" << std::endl; 
-	}
+
 }
 
 void transmitFSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn) {

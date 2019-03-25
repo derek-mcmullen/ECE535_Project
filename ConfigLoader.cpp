@@ -39,9 +39,9 @@ void loadSettings( inData &in ) {
 			{
 				in.n_ary = stoi(value);    // string to integer 
 			}
-			else if (strcmp(name.c_str(), "samples_per_bit") == 0)
+			else if (strcmp(name.c_str(), "symbol_rate") == 0)
 			{
-				in.samples_per_bit= stoi(value);    // string to integer 
+				in.symbol_rate= stoi(value);    // string to integer 
 			}
 			/* more else if clauses */
 			else /* default: */
