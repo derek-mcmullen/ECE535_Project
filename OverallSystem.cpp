@@ -13,9 +13,9 @@
 #include <algorithm>
 #include <vector>
 
-#define PI 3.14159265
-
 using namespace std; 
+
+void dumpToFile(const char* filename, vector<double> &data); 
 
 int main()
 {
@@ -29,7 +29,9 @@ int main()
 	loadSettings( configInData ); 
 
 	// Simulate the modulation 
-	transmit(carrierData, configInData, messageToTransmit); 
+	transmit( carrierData, configInData, messageToTransmit ); 
+	dumpToFile("./data/transmitOut.dat", carrierData); 
+
 
 	// Simulate the additional interference
 	// TODO
@@ -38,12 +40,8 @@ int main()
 	// TODO
 
 	// Plot relevant data
-	// demo(PI);
+	// demo(M_PI);
 	cout << "carrier is " << carrierData.size() << " elements large." << endl; 
-	for (int i = 0; i < carrierData.size(); i++) {
-		cout << "data points include: " << carrierData[i] << endl; 
-	}
-
 
 	system("pause"); 
 
@@ -51,3 +49,13 @@ int main()
 
 
 
+
+void dumpToFile(const char* filename, vector<double> &data) {
+	ofstream outFile;
+	outFile.open(filename);
+
+	for (int i = 0; i < data.size(); i++) {	
+		outFile << data[i] << "\n";
+	}
+	outFile.close(); 
+}

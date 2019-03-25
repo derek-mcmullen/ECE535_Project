@@ -10,8 +10,7 @@ struct inData {
 	int sample_rate; 
 	int n_ary;
 	std::string mod_type; 
-	int samples_per_bit; 
-	int PI = M_PI; 
+	int samples_per_bit;
 	
 
 	// defining a default constructor with initialized values

@@ -1,3 +1,5 @@
 Debug/
 *.vcxproj
 *.filters
+*.dat
+

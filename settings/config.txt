@@ -1,6 +1,6 @@
 # do not add whitespace between value pairs
-sample_rate=10
-carrier_freq=100
+sample_rate=100
+carrier_freq=1000
 
 # modulation type can be fsk, psk, or ask
 mod_type=ask

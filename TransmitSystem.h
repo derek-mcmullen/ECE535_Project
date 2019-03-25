@@ -12,6 +12,7 @@
 
 void transmit(std::vector<double> &data, inData &in, std::vector<int> &message);
 
+bool validateMessageData(const std::vector<int> &messageIn, const inData &configIn); 
 void transmitASK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
 void transmitFSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
 void transmitPSK(std::vector<double> &carrierOut, inData &configIn, std::vector<int> &messageIn);
