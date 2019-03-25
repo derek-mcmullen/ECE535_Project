@@ -2,6 +2,7 @@
 #define ConfigLoader_h
 
 #include <string>
+#include "plot_tools.h"
 
 struct inData {
 
@@ -12,6 +13,8 @@ struct inData {
 	std::string mod_type; 
 	int samples_per_bit;
 	
+	// collection of plot configuration settings
+	plot_config plot_config;
 
 	// defining a default constructor with initialized values
 	inData() :
