@@ -1,9 +1,15 @@
 # do not add whitespace between value pairs
-sample_rate=10000
-carrier_freq=1000000
+sample_rate=100
+carrier_freq=10000
 
 # modulation type can be fsk, psk, or ask
-mod_type=fsk
+mod_type=ask
 
 # n-ary choices are 2, 4, 8, or 16
-n_ary=2
+n_ary=8
+
+# desired symbol rate in symbols/sec
+symbol_rate=10
+
+# allowable maximum frequency deviation for FSK
+freq_dev=1000

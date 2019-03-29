@@ -1,33 +1,51 @@
+#define _USE_MATH_DEFINES
+
+#include "ConfigLoader.h"
 #include "InterferenceSystem.h"
+#include "plot_tools.h"
 #include "Sampler.h"
+#include "TransmitSystem.h"
 
 #include <iostream>  
 #include <fstream>
-#include <math.h>   
+#include <cmath>   
 #include <string>
 #include <algorithm>
-
-#include "plot_tools.h"
-
-#define PI 3.14159265
+#include <vector>
 
 using namespace std; 
 
-// function prototypes
-void loadSettings(); 
-
-// variables that will be set from config file
-double carrier_freq, sample_rate, n_ary;
-std::string mod_type;
-const char* file = "test_batch.txt";
+void dumpToFile(const char* filename, vector<double> &data); 
 
 int main()
 {
-	loadSettings(); 
+	// Initilaize the config data, message data, and carrier data structures
+	inData configInData; 
+	vector<int> messageToTransmit = { 1,0,1,0,2,3,1,2,6,0,1,0,5 };
+	vector<double> carrierData; 
+	vector<int> messageReceived;
 
-	// testing that files have been parsed appropriately
-	cout << mod_type << endl; 
+	// Load the config options from file
+	loadSettings( configInData ); 
 
+	// Simulate the modulation 
+	TransmitSystem TS; 
+	TS.transmit( carrierData, configInData, messageToTransmit ); 
+	dumpToFile("./data/transmitOut.dat", carrierData); 
+
+
+	// Simulate the additional interference
+	// TODO
+
+	// Simulate the demodulator
+	// TODO
+
+	// Plot relevant data
+	// demo(M_PI);
+	cout << "carrier is " << carrierData.size() << " elements large." << endl; 
+
+
+	const char* file = "test_batch.txt";
 	plot_file(file);
 	//demo(PI);
 	system("pause"); 
@@ -35,49 +53,13 @@ int main()
 }
 
 
+void dumpToFile(const char* filename, vector<double> &data) {
+	ofstream outFile;
+	outFile.open(filename);
 
-
-void loadSettings() {
-	std::ifstream cFile("settings/config.txt");
-
-	if (cFile.is_open())
-	{
-		std::string line;
-		while (getline(cFile, line)) {
-			line.erase(std::remove_if(line.begin(), line.end(), isspace),
-				line.end());
-			if (line[0] == '#' || line.empty())
-				continue;
-			auto delimiterPos = line.find("=");
-			auto name = line.substr(0, delimiterPos);
-			auto value = line.substr(delimiterPos + 1);
-			// std::cout << name << " " << value << '\n';
-
-			if (strcmp(name.c_str(), "mod_type") == 0)
-			{
-				mod_type = value;
-			}
-			else if (strcmp(name.c_str(), "carrier_freq") == 0)
-			{
-				carrier_freq = stod(value);    // string to double 
-			}
-			else if (strcmp(name.c_str(), "sample_rate") == 0)
-			{
-				sample_rate = stod(value);    // string to double 
-			}
-			else if (strcmp(name.c_str(), "n_ary") == 0)
-			{
-				n_ary = stoi(value);    // string to double 
-			}
-			/* more else if clauses */
-			else /* default: */
-			{
-				std::cout << "Value for " << name << " was not loaded properly" << std::endl;
-			}
-		}
-
+	for (int i = 0; i < data.size(); i++) {	
+		outFile << data[i] << "\n";
 	}
-	else {
-		std::cerr << "Couldn't open config file for reading.\n";
-	}
+	outFile.close(); 
 }
+
