@@ -44,11 +44,13 @@ int main()
 	// demo(M_PI);
 	cout << "carrier is " << carrierData.size() << " elements large." << endl; 
 
+
+	const char* file = "test_batch.txt";
+	plot_file(file);
+	//demo(PI);
 	system("pause"); 
 
 }
-
-
 
 
 void dumpToFile(const char* filename, vector<double> &data) {
@@ -60,3 +62,4 @@ void dumpToFile(const char* filename, vector<double> &data) {
 	}
 	outFile.close(); 
 }
+

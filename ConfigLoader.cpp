@@ -7,7 +7,7 @@
 #include <algorithm>
 
 
-void loadSettings( inData &in ) {
+void loadSettings(inData &in) {
 	std::ifstream cFile("settings/config.txt");
 
 	if (cFile.is_open())
@@ -59,4 +59,3 @@ void loadSettings( inData &in ) {
 		std::cerr << "Couldn't open config file for reading.\n";
 	}
 }
-
