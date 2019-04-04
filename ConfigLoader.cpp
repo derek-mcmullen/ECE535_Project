@@ -61,7 +61,6 @@ void loadSettings( inData &in ) {
 					in.system_plots.push_back(newPlot);
 				}
 				plot_counter = 0;		// Reset plot counter just in case
-				cout << in.system_plots.size();
 			}
 			else if (strcmp(name.c_str(), "plot_data_fn") == 0)
 			{

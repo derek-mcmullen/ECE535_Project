@@ -21,7 +21,7 @@ int main()
 {
 	// Initilaize the config data, message data, and carrier data structures
 	inData configInData; 
-	vector<int> messageToTransmit = { 1,0,1,0,1,0,1,0 };
+	vector<int> messageToTransmit = { 1,1,1,0,0,0,1,0 };
 	vector<double> carrierData; 
 	vector<int> messageReceived;
 
