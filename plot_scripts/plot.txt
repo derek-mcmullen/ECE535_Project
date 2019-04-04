@@ -1,0 +1,13 @@
+reset
+set term wxt 0
+set ylabel 'Some-Y-Value'
+set xlabel 'Plot-Number-One'
+set title 'This-is-plot-one'
+set style line 5 lt 2 lw 1 pt -1
+plot "data/transmitOut.dat" with linespoints ls 5
+set term wxt 1
+set ylabel 'Y-Axis'
+set xlabel 'X-Axis'
+set title 'Title'
+set style line 6 lt -1 lw 1 pt 0
+plot "data/tx_2.dat" with linespoints ls 6

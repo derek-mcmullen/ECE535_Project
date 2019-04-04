@@ -10,3 +10,29 @@ n_ary=2
 
 # number of samples per bit
 samples_per_bit=10
+
+##########################
+### Plot configuration ###
+##########################
+# You need to tell the program how many plots you want in total
+# then specify the configuration of each plot individually
+# in between each plot configuration add 'next_plot=1'
+#
+# You can just specify the filename and it will plot with
+# default settings.
+
+
+# Define total number of plots here
+number_of_plots = 2
+
+# Define the plot configurations here
+plot_data_fn=data/transmitOut.dat
+x_axis_title=Plot-Number-One
+y_axis_title=Some-Y-Value
+main_title=This-is-plot-one
+line_color=2
+line_width=1
+line_point=-1
+
+next_plot=1
+plot_data_fn=data/tx_2.dat

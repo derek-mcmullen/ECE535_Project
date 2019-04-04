@@ -43,8 +43,12 @@ int main()
 	// demo(M_PI);
 	cout << "carrier is " << carrierData.size() << " elements large." << endl; 
 
-	system("pause"); 
+	//system("pause"); 
 
+
+	plot_file(configInData.system_plots);
+
+	system("pause");
 }
 
 

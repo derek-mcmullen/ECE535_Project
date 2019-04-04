@@ -24,22 +24,23 @@ using namespace std;
 
 // plot config is essentially the parameters of a gnuplot file for each plot.
 struct plot_config {
-	const char* line_color;
-	const char* line_width;
-	const char* line_point;
-	const char* x_axis_title;
-	const char* y_axis_title;
-	const char* main_title;
-	const char* file_to_plot;
+	string line_color;
+	string line_width;
+	string line_point;
+	string x_axis_title;
+	string y_axis_title;
+	string main_title;
+	string file_to_plot;
 
 	// defining a default constructor with initialized values
 	plot_config() :
-		line_color("lt -1"),
-		line_width("lw 1"),
-		line_point("pt 0"),
-		x_axis_title(""),
-		y_axis_title(""),
-		main_title(file_to_plot)
+		line_color("-1"),
+		line_width("1"),
+		line_point("0"),
+		x_axis_title("X-Axis"),
+		y_axis_title("Y-Axis"),
+		main_title("Title"),
+		file_to_plot("")
 	{}
 
 };
@@ -54,7 +55,7 @@ public:
 	plot_config getPlot(int plot_num) {  return this->system_plots.at(plot_num);  };
 };
 
-bool plot_file(const char* file_to_plot);
+bool plot_file(vector<plot_config> system_plots);
 int demo(float pi);
 
 

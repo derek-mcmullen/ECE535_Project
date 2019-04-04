@@ -18,25 +18,33 @@ Simple demo of gnuplot
 
 
 // Creates a gnuplot file, takes in a filename of the data we want to plot.
-bool plot_file(const char* file_to_plot) {
+bool plot_file(vector<plot_config> system_plots) {
 	// Create plot file 
-	// TODO: add functionality for plot configuration from config struct
 	ofstream plotFile;
-	plotFile.open("./plot_scripts/plot.txt");
+	plotFile.open("plot_scripts/plot.txt");
+	plotFile << "reset\n";		// Always reset the plot configuration
 	if (plotFile.is_open()) {
-		plotFile << "reset\n" << "set ylabel 'Sample Value'\n" << "set xlabel 'Amount of Gayness Derek is'\n" << "set title 'Summary of the Year 2018'\n";
-		plotFile << "plot \"./data/" << file_to_plot << "\" with lines ls 1";
+		// Set up each plot we have in the configuration
+		for (int i = 0; i < system_plots.size(); i++) {
+			plotFile << "set term wxt " << i << "\n";		// Create a new window for each plot
+
+			// Set up each individual plot settings
+			plotFile << "set ylabel '" << system_plots.at(i).y_axis_title.c_str() << "'\n";
+			plotFile << "set xlabel '" << system_plots.at(i).x_axis_title.c_str() << "'\n";
+			plotFile << "set title '" << system_plots.at(i).main_title.c_str() << "'\n";
+			plotFile  << "set style line " << i+5 << " lt " << system_plots.at(i).line_color.c_str() \
+				<< " lw " << system_plots.at(i).line_width.c_str() << " pt " << system_plots.at(i).line_point.c_str() << "\n";
+			plotFile << "plot \"" << system_plots.at(i).file_to_plot.c_str() << "\" with linespoints ls " << i+5 << "\n";
+		}
 		plotFile.close();
 	}
 	else {
 		// Break if we cant open file
-		cout << "Can't open file " << file_to_plot;
+		cout << "Can't open file plot_scripts/plot.txt";
 		return false;
 	}
-
-	// Call batch file to plot.
-	system("plot_scripts\\plotter.bat");
-
+		// Call batch file to plot.
+		system("plot_scripts\\plotter.bat");
 	return true;
 }
 

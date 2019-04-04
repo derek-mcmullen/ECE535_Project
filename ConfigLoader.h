@@ -14,7 +14,7 @@ struct inData {
 	int samples_per_bit;
 	
 	// collection of plot configuration settings
-	plot_config plot_config;
+	vector<plot_config> system_plots;
 
 	// defining a default constructor with initialized values
 	inData() :
