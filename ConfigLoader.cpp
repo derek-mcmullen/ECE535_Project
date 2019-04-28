@@ -47,6 +47,10 @@ void loadSettings(inData &in) {
 			{
 				in.freq_dev = stoi(value);    // string to integer 
 			}
+			else if (strcmp(name.c_str(), "noise_variance") == 0)
+			{
+				in.noise_variance = stoi(value);    // string to integer 
+			}
 			/* more else if clauses */
 			else /* default: */
 			{

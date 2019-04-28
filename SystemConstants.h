@@ -2,6 +2,14 @@
 #define SystemConstants_h
 
 #include <string>
+#include <complex>
+#include <iostream>
+#include <valarray>
+
+typedef std::complex<double> Complex;
+typedef std::valarray<Complex> CArray;
+
+#define NOISE_VARIANCE 30
 
 struct inData {
 
@@ -12,6 +20,7 @@ struct inData {
 	std::string mod_type;
 	int symbol_rate;
 	int freq_dev; 
+	double noise_variance; 
 
 
 	// defining a default constructor with initialized values
@@ -21,7 +30,8 @@ struct inData {
 		n_ary(2),
 		mod_type("fsk"),
 		symbol_rate(10), 
-		freq_dev(1000)
+		freq_dev(1000), 
+		noise_variance(0.01)
 	{}
 };
 

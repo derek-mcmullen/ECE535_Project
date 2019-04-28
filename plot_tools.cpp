@@ -23,7 +23,7 @@ bool plot_file(const char* file_to_plot) {
 	ofstream plotFile;
 	plotFile.open("./plot_scripts/plot.txt");
 	if (plotFile.is_open()) {
-		plotFile << "reset\n" << "set ylabel 'Sample Value'\n" << "set xlabel 'Amount of Gayness Derek is'\n" << "set title 'Summary of the Year 2018'\n";
+		plotFile << "reset\n" << "set ylabel 'Amplitude'\n" << "set xlabel 'Time (s)'\n" << "set title 'Time Domain Modulated Signal'\n";
 		plotFile << "plot \"./data/" << file_to_plot << "\" with lines ls 1";
 		plotFile.close();
 	}

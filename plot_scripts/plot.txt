@@ -1,5 +1,5 @@
 reset
-set ylabel 'Sample Value'
-set xlabel 'Amount of Gayness Derek is'
-set title 'Summary of the Year 2018'
+set ylabel 'Amplitude'
+set xlabel 'Time (s)'
+set title 'Time Domain Modulated Signal'
 plot "./data/transmitOut.dat" with lines ls 1
