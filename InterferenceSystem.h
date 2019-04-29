@@ -10,6 +10,7 @@ class InterferenceSystem {
 public:
 	InterferenceSystem();
 	void AWGN(std::vector<Complex> &dataOut, inData &configIn, std::vector<Complex> &dataIn);
+	void fadeIt(std::vector<Complex> &dataOut, inData &configIn, std::vector<Complex> &dataIn);
 private:
 
 	double duration_;

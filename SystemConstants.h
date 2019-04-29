@@ -9,7 +9,7 @@
 typedef std::complex<double> Complex;
 typedef std::valarray<Complex> CArray;
 
-#define NOISE_VARIANCE 30
+#define NOISE_VARIANCE 0.1
 
 struct inData {
 
@@ -21,6 +21,7 @@ struct inData {
 	int symbol_rate;
 	int freq_dev; 
 	double noise_variance; 
+	double fade; 
 
 
 	// defining a default constructor with initialized values
@@ -31,7 +32,8 @@ struct inData {
 		mod_type("fsk"),
 		symbol_rate(10), 
 		freq_dev(1000), 
-		noise_variance(0.01)
+		noise_variance(0.01), 
+		fade(0)
 	{}
 };
 

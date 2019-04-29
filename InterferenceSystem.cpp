@@ -1,9 +1,12 @@
 #include "InterferenceSystem.h"
+#include "SystemConstants.h"
 
 #include <ctime>
 #include <iostream>
 #include <string>
 #include <random>
+
+#define _USE_MATH_DEFINES
 
 InterferenceSystem::InterferenceSystem() :
 	duration_(10),
@@ -29,4 +32,23 @@ void InterferenceSystem::AWGN(std::vector<Complex> &dataOut, inData &configIn, s
 
 	
 	std::cout << "AWGN with a variance of " << NOISE_VARIANCE << " has been added to the signal" << std::endl; 
+}
+
+void InterferenceSystem::fadeIt(std::vector<Complex> &dataOut, inData &configIn, std::vector<Complex> &dataIn) {
+	std::cout << "Applying multipath fading with a radian delay of " << configIn.fade << std::endl; 
+
+	std::vector<Complex> delayData; 
+
+	double interp = configIn.fade / (2* 3.14159) ; 
+	double temp = 0;
+
+	for (int i = 0; i < dataIn.size()-1; i++) {
+		temp = (1-interp) * (dataIn.at(i).real()) - interp*(dataIn.at(i + 1).real()); 
+		delayData.push_back(temp); 
+	}
+
+	for (int i = 0; i < dataIn.size() - 1; i++) {
+		dataOut.push_back(dataIn.at(i) + delayData.at(i)); 
+	} 
+
 }

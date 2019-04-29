@@ -49,7 +49,11 @@ void loadSettings(inData &in) {
 			}
 			else if (strcmp(name.c_str(), "noise_variance") == 0)
 			{
-				in.noise_variance = stoi(value);    // string to integer 
+				in.noise_variance = stod(value);    // string to double 
+			}
+			else if (strcmp(name.c_str(), "fade") == 0)
+			{
+				in.fade = stod(value);    // string to double 
 			}
 			/* more else if clauses */
 			else /* default: */

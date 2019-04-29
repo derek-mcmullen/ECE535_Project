@@ -115,13 +115,15 @@ void ReceiveSystem::receiveFSK(std::vector<int> &messageOut, inData &configIn, s
 		messageOut.push_back(makeFSKSymbolDetermination(freq, configIn) ); 
 	}
 
-	//std::ofstream outfile;
-	//outfile.open("data/transmitout.dat");
+	std::cout << "Applying an FFT to symbols with an FFT size of " << fftSize << std::endl; 
 
-	//for (int i = 0; i < fftsize; i++) {
-	//	outfile << symbolffts[i] << "\n";
-	//}
-	//outfile.close();
+	std::ofstream outfile;
+	outfile.open("data/fftOut.dat");
+
+	for (int i = 0; i < fftSize; i++) {
+		outfile << symbolFFTs[i] << "\n";
+	}
+	outfile.close();
 
 
 }

@@ -1,5 +1,5 @@
 reset
 set ylabel 'Amplitude'
-set xlabel 'Time (s)'
+set xlabel 'Time (samples)'
 set title 'Time Domain Modulated Signal'
-plot "./data/transmitOut.dat" with lines ls 1
+plot "./data/messageOut.dat" with lines ls 1

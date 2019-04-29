@@ -21,14 +21,20 @@
 using namespace std; 
 
 void dumpToFile(const char* filename, vector<Complex> &data);
+void dumpToFile(const char* filename, vector<int> &data);
 
 int main()
 {
 	// Initilaize the config data, message data, and carrier data structures
 	inData configInData; 
-	vector<int> messageToTransmit = { 0,0,0, 0,0,1, 0,1,0, 0,1,1, 1,0,0, 1,0,1, 1,1,0 ,1,1,1 };	// { 0,0,1,0,1,0,0,1,1,1,0,1,1,1,0,1,1,1};
+	//  vector<int> messageToTransmit = { 0,1,0,1,0,1,0,1,0,1 };							// 2-ary example
+	// vector<int> messageToTransmit = { 0,0, 0,1, 1,0, 1,1, 0,0, 0,1, 1,0, 1,1 };				// 4-ary example
+	 vector<int> messageToTransmit = { 0,0,0, 0,0,1, 0,1,0, 0,1,1, 1,0,0, 1,0,1, 1,1,0 ,1,1,1 };		// 8-ary
+	// vector<int> messageToTransmit = { 0,0,0,1, 0,0,1,0, 0,0,1,1, 0,1,0,0, 0,1,0,1, 0,1,1,0, 0,1,1,1, 1,0,0,0, 1,0,0,1, 1,0,1,0, 1,0,1,1, 1,1,0,0, 1,1,0,1, 1,1,1,0, 1,1,1,1 };
+
 	vector<Complex> carrierData; 
 	vector<Complex> noisyCarrier; 
+	vector<Complex> fadedCarrier; 
 	vector<int> messageReceived;
 
 
@@ -65,13 +71,17 @@ int main()
 	// Simulate any additional interference / noise
 	InterferenceSystem IS;
 	IS.AWGN(noisyCarrier, configInData, carrierData);
+	IS.fadeIt(fadedCarrier, configInData, noisyCarrier); 
+	dumpToFile("./data/noisyOut.dat", noisyCarrier);
+	dumpToFile("./data/fadedOut.dat", fadedCarrier);
+
 
 	// Simulate the demodulator
 	std::cout << std::endl;
 	std::cout << "Received message details" << std::endl;
 	std::cout << "----------------------------" << endl;
 	ReceiveSystem RS; 
-	RS.receive(messageReceived, configInData, noisyCarrier); 
+	RS.receive(messageReceived, configInData, noisyCarrier);
 
 	// Print the demodulated output
 	std::cout << "demodulate output data: {";
@@ -82,6 +92,7 @@ int main()
 		}
 	}
 	std::cout << "}" << std::endl;
+	dumpToFile("./data/messageOut.dat", messageReceived);
 
 	// Compute number or error bits
 	int errorCount = 0; 
@@ -124,8 +135,13 @@ int main()
 
 
 	// Plot relevant data
-
-	//plot_file("transmitOut.dat");
+	plot_file("transmitOut.dat"); 
+	plot_file("noisyOut.dat");
+	plot_file("fadedOut.dat"); 
+	if (strcmp(configInData.mod_type.c_str(), "fsk") == 0) {
+		plot_fft("fftOut.dat");
+	} 
+	plot_file("messageOut.dat"); 
 	system("pause"); 
 
 }
@@ -135,9 +151,20 @@ void dumpToFile(const char* filename, vector<Complex> &data) {
 	ofstream outFile;
 	outFile.open(filename);
 
-	for (int i = 0; i < data.size(); i++) {	
+	for (int i = 0; i < data.size(); i++) {
 		outFile << data[i].real() << "\n";
 	}
-	outFile.close(); 
+	outFile.close();
+}
+
+
+void dumpToFile(const char* filename, vector<int> &data) {
+	ofstream outFile;
+	outFile.open(filename);
+
+	for (int i = 0; i < data.size(); i++) {
+		outFile << data[i] << "\n";
+	}
+	outFile.close();
 }
 

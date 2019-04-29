@@ -116,9 +116,11 @@ bool TransmitSystem::validateMessageData(const std::vector<int>& messageIn, cons
 
 void TransmitSystem::transmitASK(std::vector<Complex> &carrierOut, inData &configIn, std::vector<int> &messageIn) {
 
+	double timeStep = 1 / (double)configIn.sample_rate;
+
 	// prep the carrier data points
 	for (int i = 0; i < numTotalDataPts_; i++) {
-		carrierOut.push_back(sin(2 * configIn.carrier_freq * i));
+		carrierOut.push_back(sin(2 * configIn.carrier_freq * (double)i*timeStep));
 	}
 
 	// key the amplitudes
@@ -134,6 +136,7 @@ void TransmitSystem::transmitASK(std::vector<Complex> &carrierOut, inData &confi
 
 void TransmitSystem::transmitFSK(std::vector<Complex> &carrierOut, inData &configIn, std::vector<int> &messageIn) {
 	double freqStep = configIn.freq_dev * 2 / configIn.n_ary; 
+
 
 	double modulatedFreq = configIn.carrier_freq; 
 	double carrierFreq = configIn.carrier_freq; 
@@ -209,7 +212,7 @@ void TransmitSystem::transmitPSK(std::vector<Complex> &carrierOut, inData &confi
 		if (configIn.n_ary == 2) {
 
 			for (int j = 0; j < dataPointsPerSymbol_; j++) {
-				carrierOut.push_back(sin((2 * M_PI*configIn.carrier_freq) * (double)j* timeStep + ((double)messageIn[i]*phaseOffset)));
+				carrierOut.push_back(sin((2 * M_PI *configIn.carrier_freq) * (double)j* timeStep + ((double)messageIn[i]*phaseOffset)));
 			}
 		}
 
