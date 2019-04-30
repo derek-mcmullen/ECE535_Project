@@ -27,10 +27,10 @@ int main()
 {
 	// Initilaize the config data, message data, and carrier data structures
 	inData configInData; 
-	//  vector<int> messageToTransmit = { 0,1,0,1,0,1,0,1,0,1 };							// 2-ary example
+	// vector<int> messageToTransmit = { 0,1,0,1,0,1,0,1,0,1 };							// 2-ary example
 	// vector<int> messageToTransmit = { 0,0, 0,1, 1,0, 1,1, 0,0, 0,1, 1,0, 1,1 };				// 4-ary example
-	 vector<int> messageToTransmit = { 0,0,0, 0,0,1, 0,1,0, 0,1,1, 1,0,0, 1,0,1, 1,1,0 ,1,1,1 };		// 8-ary
-	// vector<int> messageToTransmit = { 0,0,0,1, 0,0,1,0, 0,0,1,1, 0,1,0,0, 0,1,0,1, 0,1,1,0, 0,1,1,1, 1,0,0,0, 1,0,0,1, 1,0,1,0, 1,0,1,1, 1,1,0,0, 1,1,0,1, 1,1,1,0, 1,1,1,1 };
+	// vector<int> messageToTransmit = { 0,0,0, 0,0,1, 0,1,0, 0,1,1, 1,0,0, 1,0,1, 1,1,0 ,1,1,1 };		// 8-ary
+	 vector<int> messageToTransmit = { 0,0,0,1, 0,0,1,0, 0,0,1,1, 0,1,0,0, 0,1,0,1, 0,1,1,0, 0,1,1,1, 1,0,0,0, 1,0,0,1, 1,0,1,0, 1,0,1,1, 1,1,0,0, 1,1,0,1, 1,1,1,0, 1,1,1,1 };
 
 	vector<Complex> carrierData; 
 	vector<Complex> noisyCarrier; 
@@ -142,7 +142,6 @@ int main()
 		plot_fft("fftOut.dat");
 	} 
 	plot_file("messageOut.dat"); 
-	system("pause"); 
 
 }
 

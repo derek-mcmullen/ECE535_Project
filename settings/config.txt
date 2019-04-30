@@ -3,7 +3,7 @@ sample_rate=10000
 carrier_freq=1000
 
 # modulation type can be fsk, psk, or ask
-mod_type=psk
+mod_type=ask
 
 # n-ary choices are 2, 4, 8, or 16
 n_ary=8
@@ -15,4 +15,4 @@ symbol_rate=1
 freq_dev=200
 
 # multipath delay range of 0 - 2PI (6.28)
-fade=3.14
+fade=1.57

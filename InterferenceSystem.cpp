@@ -39,12 +39,14 @@ void InterferenceSystem::fadeIt(std::vector<Complex> &dataOut, inData &configIn,
 
 	std::vector<Complex> delayData; 
 
-	double interp = configIn.fade / (2* 3.14159) ; 
+	double delayAmt = (configIn.fade / (2* 3.14159)) * (1/configIn.carrier_freq / 1/configIn.sample_rate) ; 
 	double temp = 0;
-
-	for (int i = 0; i < dataIn.size()-1; i++) {
-		temp = (1-interp) * (dataIn.at(i).real()) - interp*(dataIn.at(i + 1).real()); 
-		delayData.push_back(temp); 
+	
+	for (int i = 0; i < delayAmt - 1; i++) {
+		delayData.push_back(0);
+	}
+	for (int i = 0; i < dataIn.size() - 1; i++) {
+		delayData.push_back(dataIn.at(i));
 	}
 
 	for (int i = 0; i < dataIn.size() - 1; i++) {
